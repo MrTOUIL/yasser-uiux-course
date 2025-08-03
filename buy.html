@@ -13,10 +13,10 @@
       background: url('https://wallpaperaccess.com/full/1182799.jpg') no-repeat center center fixed;
       background-size: cover;
       min-height: 100vh;
-      position: relative;
+      color: #333;
     }
 
-    /* Overlay sombre */
+    /* Overlay léger */
     body::before {
       content: "";
       position: fixed;
@@ -24,7 +24,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(255, 255, 255, 0.85);
       z-index: -1;
     }
 
@@ -37,241 +37,267 @@
     h1 {
       text-align: center;
       margin-bottom: 40px;
-      color: #ff9800;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      color: #df5a21;
       font-size: 2.5rem;
+      position: relative;
+      padding-bottom: 15px;
+    }
+
+    h1::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: #ff9800;
     }
 
     .course-list {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 30px;
     }
 
     .course {
-      background-color: rgba(255, 255, 255, 0.9);
+      background-color: white;
       border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
       overflow: hidden;
       transition: all 0.3s ease;
-      position: relative;
+      display: flex;
+      flex-direction: column;
     }
 
     .course:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     }
 
     /* Style spécial pour le cours gratuit */
     .free-course {
-      background-color: rgba(76, 175, 80, 0.9);
-      border: 2px solid #4CAF50;
-      animation: pulse 2s infinite;
-    }
-
-    .free-course h3 {
-      color: white !important;
-    }
-
-    .free-course p {
-      color: #e8f5e9 !important;
+      border-top: 4px solid #4CAF50;
+      position: relative;
     }
 
     .free-tag {
       position: absolute;
       top: 15px;
       right: 15px;
-      background-color: #2E7D32;
+      background-color: #4CAF50;
       color: white;
-      padding: 5px 10px;
+      padding: 5px 15px;
       border-radius: 20px;
       font-weight: bold;
-      font-size: 0.8rem;
+      font-size: 0.9rem;
       box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      animation: pulse 2s infinite;
     }
 
     @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7); }
-      70% { box-shadow: 0 0 0 15px rgba(76, 175, 80, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); }
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
     }
 
-    .course img {
+    .course-img {
       width: 100%;
       height: 180px;
       object-fit: cover;
-      border-bottom: 1px solid #eee;
     }
 
     .course-content {
-      padding: 20px;
+      padding: 25px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
     }
 
     .course h3 {
-      margin: 0 0 10px;
-      color: #333;
-      font-size: 1.3rem;
+      margin: 0 0 12px;
+      color: #222;
+      font-size: 1.4rem;
     }
 
     .course p {
-      font-size: 14px;
-      color: #666;
+      font-size: 15px;
+      color: #555;
       line-height: 1.5;
+      margin-bottom: 20px;
     }
 
     .btn-group {
       display: flex;
       gap: 10px;
-      margin-top: 15px;
+      margin-top: auto;
     }
 
-    .buy-btn {
+    .btn {
       display: inline-block;
       padding: 10px 20px;
-      background-color: #ff9800;
-      color: white;
-      border: none;
       border-radius: 6px;
       text-decoration: none;
       font-weight: bold;
       transition: all 0.3s;
-      cursor: pointer;
-      flex: 1;
       text-align: center;
+      flex: 1;
+      border: none;
+      cursor: pointer;
     }
 
-    .buy-btn:hover {
+    .primary-btn {
+      background-color: #ff9800;
+      color: white;
+    }
+
+    .primary-btn:hover {
       background-color: #e68900;
-      transform: translateY(-2px);
+    }
+
+    .secondary-btn {
+      background-color: #f1f1f1;
+      color: #333;
+    }
+
+    .secondary-btn:hover {
+      background-color: #e0e0e0;
     }
 
     .free-btn {
-      background-color: #2E7D32;
+      background-color: #4CAF50;
+      color: white;
     }
 
     .free-btn:hover {
-      background-color: #1B5E20;
+      background-color: #3d8b40;
     }
 
     .more-info {
-      display: none;
-      margin-top: 15px;
-      font-size: 14px;
-      color: #444;
-      border-top: 1px solid #ddd;
-      padding-top: 10px;
-      animation: fadeIn 0.4s ease-in-out;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
+      color: #333; /* Texte en noir */
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+    .more-info strong {
+      color: #222;
+    }
+
+    .more-info ul {
+      padding-left: 20px;
+      margin: 10px 0;
+    }
+
+    .more-info li {
+      margin-bottom: 8px;
     }
 
     .back-btn {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
       margin-bottom: 30px;
-      padding: 12px 25px;
+      padding: 10px 20px;
       background-color: #ff9800;
       color: white;
       text-decoration: none;
-      border-radius: 30px;
+      border-radius: 6px;
       font-weight: bold;
       transition: all 0.3s;
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
 
     .back-btn:hover {
       background-color: #e68900;
       transform: translateY(-2px);
-      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+
+    .back-btn::before {
+      content: "←";
+      margin-right: 8px;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <a href="./index.html" class="back-btn">← Back to Home</a>
+    <a href="./index.html" class="back-btn">Back to Home</a>
     <h1>Our Courses</h1>
     <div class="course-list">
 
       <div class="course">
-        <img src="https://tse4.mm.bing.net/th/id/OIP.NUBsH2ptezkbTQlPvywDAgHaHa?pid=ImgDet&rs=1" alt="Linux Course">
+        <img class="course-img" src="https://tse4.mm.bing.net/th/id/OIP.NUBsH2ptezkbTQlPvywDAgHaHa?pid=ImgDet&rs=1" alt="Linux Course">
         <div class="course-content">
-          <h3>Mastering Linux: Operating Systems for beginners (SYS1)</h3>
+          <h3>Mastering Linux: Operating Systems</h3>
           <p>Master the core concepts of Linux and Operating Systems in a clear, hands-on, beginner-friendly approach.</p>
 
           <div class="btn-group">
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfW_sX3JVMiLs8nBzn433okZZhMmG6Np2uiJq53s_-Ym9j76A/viewform?usp=header" class="buy-btn">Buy Now</a>
-            <button class="buy-btn" onclick="toggleInfo(this)">More Info</button>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfW_sX3JVMiLs8nBzn433okZZhMmG6Np2uiJq53s_-Ym9j76A/viewform?usp=header" class="btn primary-btn">Enroll Now</a>
+            <button class="btn secondary-btn" onclick="toggleInfo(this)">Details</button>
           </div>
 
-          <div class="more-info">
-            <strong>Detailed Syllabus:</strong>
+          <div class="more-info" style="display: none;">
+            <strong>Course Syllabus:</strong>
             <ul>
-              <li>🧠 Introduction to Operating Systems & Linux</li>
-              <li>📂 Filesystem, Processes & Permissions</li>
-              <li>🔧 Shell Scripting & Command Line</li>
-              <li>💻 Process Scheduling & Memory Management</li>
-              <li>🌐 Networking Basics in Linux</li>
-              <li>🛠️ Real Projects & Server Deployment</li>
-              <li>🔧 Price: 2000 DZD</li>
-              <li>🌐 Duration: 1 Month</li>
+              <li>Introduction to Operating Systems & Linux</li>
+              <li>Filesystem, Processes & Permissions</li>
+              <li>Shell Scripting & Command Line</li>
+              <li>Process Scheduling & Memory Management</li>
+              <li>Networking Basics in Linux</li>
+              <li>Real Projects & Server Deployment</li>
             </ul>
-            <p>👨‍🏫 Delivered by <strong>TOUIL Abderezak</strong>, Student at ESI, with lifetime access, downloadable materials, and a certificate of completion.</p>
+            <p><strong>Price:</strong> 2000 DZD | <strong>Duration:</strong> 1 Month</p>
+            <p>Taught by <strong>TOUIL Abderezak</strong>, Student at ESI. Includes lifetime access and certificate.</p>
           </div>
         </div>
       </div>
 
       <div class="course">
-        <img src="https://tse4.mm.bing.net/th/id/OIP.uoorexdE_jdJ8TYwaqp93QHaEr?pid=ImgDet&rs=1" alt="UI/UX Beginner">
+        <img class="course-img" src="https://tse4.mm.bing.net/th/id/OIP.uoorexdE_jdJ8TYwaqp93QHaEr?pid=ImgDet&rs=1" alt="UI/UX Beginner">
         <div class="course-content">
           <h3>UI/UX Design for Beginners</h3>
-          <p>Learn the fundamentals of user interface and experience design from scratch using adequate platforms and indeed logical design thinking.</p>
+          <p>Learn the fundamentals of user interface and experience design from scratch with modern tools and methodologies.</p>
 
           <div class="btn-group">
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLScLsXugKfsWHPE9FgrXpmEunFUbdCrue4N0PqIQgHO2Yi-fgQ/viewform?usp=header" class="buy-btn">Buy Now</a>
-            <button class="buy-btn" onclick="toggleInfo(this)">More Info</button>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScLsXugKfsWHPE9FgrXpmEunFUbdCrue4N0PqIQgHO2Yi-fgQ/viewform?usp=header" class="btn primary-btn">Enroll Now</a>
+            <button class="btn secondary-btn" onclick="toggleInfo(this)">Details</button>
           </div>
 
-          <div class="more-info">
-            <strong>Detailed Syllabus:</strong>
+          <div class="more-info" style="display: none;">
+            <strong>Course Syllabus:</strong>
             <ul>
-              <li>🎨 Introduction to UI Principles</li>
-              <li>🔍 User Research & Personas</li>
-              <li>🧩 Wireframing and Prototyping (Figma)</li>
-              <li>🛠 Design Tools (Figma, Adobe XD)</li>
-              <li>📱 Responsive Design Basics</li>
-              <li>💼 Final Project: Build a complete prototype</li>
+              <li>Introduction to UI Principles</li>
+              <li>User Research & Personas</li>
+              <li>Wireframing and Prototyping</li>
+              <li>Design Tools (Figma, Adobe XD)</li>
+              <li>Responsive Design Basics</li>
+              <li>Final Project: Complete prototype</li>
             </ul>
-            <p>👨‍🏫 Delivered by Yasser Maouchi, with lifetime access, downloadable content, and a certificate of completion.</p>
+            <p>Taught by <strong>Yasser Maouchi</strong>. Includes downloadable resources and portfolio project.</p>
           </div>
         </div>
       </div>
 
       <div class="course free-course">
         <div class="free-tag">FREE</div>
-        <img src="https://tse1.mm.bing.net/th/id/OIP.8FKEC3yvVGnRC82EYkeGKwAAAA?pid=ImgDet&rs=1" alt="Algorithm Course">
+        <img class="course-img" src="https://tse1.mm.bing.net/th/id/OIP.8FKEC3yvVGnRC82EYkeGKwAAAA?pid=ImgDet&rs=1" alt="Algorithm Course">
         <div class="course-content">
-          <h3>Algorithmique et structures de données statiques (ALSDS)</h3>
-          <p>Ce cours est destiné aux étudiants de l'ESI, offert GRATUITEMENT pour les aider à établir de solides bases dans ce module.</p>
+          <h3>Algorithm & Data Structures</h3>
+          <p>Special free course for ESI students to build strong foundations in algorithms and static data structures.</p>
 
           <div class="btn-group">
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdBGAS4gJ3w4pqc5Qmvcf9xW0ngZeZFEym1VqPnr7Wdd6AQVA/viewform?usp=header" class="buy-btn free-btn">GET IT FREE</a>
-            <button class="buy-btn" onclick="toggleInfo(this)">More Info</button>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdBGAS4gJ3w4pqc5Qmvcf9xW0ngZeZFEym1VqPnr7Wdd6AQVA/viewform?usp=header" class="btn free-btn">Get Free Access</a>
+            <button class="btn secondary-btn" onclick="toggleInfo(this)">Details</button>
           </div>
 
-          <div class="more-info">
-            <strong>Plan détaillé :</strong>
+          <div class="more-info" style="display: none;">
+            <strong>Detailed Program:</strong>
             <ul>
-              <li>📌 Bases des algorithmes et des organigrammes</li>
-              <li>🧮 Récursivité, boucles et structures itératives</li>
-              <li>📊 Algorithmes de tri et de recherche</li>
-              <li>📦 Analyse de la complexité (temps et mémoire)</li>
-              <li>🏆 Défi final : Résolution de problèmes réels</li>
+              <li>Algorithm basics and flowcharts</li>
+              <li>Recursion and iterative structures</li>
+              <li>Sorting and search algorithms</li>
+              <li>Complexity analysis (time/space)</li>
+              <li>Practical problem solving</li>
             </ul>
-            <p>👨‍🏫 Proposé par <strong>TOUIL Abderezak</strong>, expert en algorithmique (niveau olympiade) et étudiant à l'ESI. Accès complet, contenu téléchargeable et Suivi en temps réel.</p>
+            <p>Taught by <strong>TOUIL Abderezak</strong>, algorithm expert. Includes real-time support and exercises.</p>
           </div>
         </div>
       </div>
@@ -281,13 +307,13 @@
 
   <script>
     function toggleInfo(button) {
-      const info = button.parentElement.nextElementSibling;
+      const info = button.closest('.btn-group').nextElementSibling;
       if (info.style.display === 'block') {
         info.style.display = 'none';
-        button.textContent = 'More Info';
+        button.textContent = 'Details';
       } else {
         info.style.display = 'block';
-        button.textContent = 'Hide Info';
+        button.textContent = 'Hide Details';
       }
     }
   </script>
