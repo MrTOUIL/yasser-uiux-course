@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "build": "ejs-cli views/home.ejs -o public/index.html && ejs-cli views/buy.ejs -o public/buy.html && ejs-cli views/login.ejs -o public/login.html && ejs-cli views/register.ejs -o public/register.html && ejs-cli views/nabda.ejs -o public/nabda.html"
-  },
+"scripts": {
+  "deploy": "git add . && git commit -m 'Auto-deploy' && git push origin main"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
