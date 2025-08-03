@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Our UI/UX Courses</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 30px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+      color: #df5a21;
+    }
+
+    .course-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .course {
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(178, 8, 8, 0.689);
+      overflow: hidden;
+      transition: transform 0.3s;
+      position: relative;
+    }
+
+    .course:hover {
+      transform: translateY(-5px);
+    }
+
+    .course img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .course-content {
+      padding: 20px;
+    }
+
+    .course h3 {
+      margin: 0 0 10px;
+      color: #222;
+    }
+
+    .course p {
+      font-size: 14px;
+      color: #bb8d62;
+    }
+
+    .buy-btn {
+      display: inline-block;
+      margin-top: 15px;
+      margin-right: 10px;
+      padding: 10px 20px;
+      background-color: #ff9800;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.2s;
+      cursor: pointer;
+    }
+
+    .buy-btn:hover {
+      background-color: #e68900;
+    }
+
+    .more-info {
+      display: none;
+      margin-top: 15px;
+      font-size: 14px;
+      color: #444;
+      border-top: 1px solid #ddd;
+      padding-top: 10px;
+      animation: fadeIn 0.4s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1> Our Courses</h1>
+    <div class="course-list">
+
+     
+
+    <div class="course">
+  <img src="https://tse4.mm.bing.net/th/id/OIP.NUBsH2ptezkbTQlPvywDAgHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Linux Course">
+  <div class="course-content">
+    <h3>Mastering Linux: Operating Systems for begginers (SYS1)</h3>
+    <p>Master the core concepts of Linux and Operating Systems in a clear, hands-on, beginner-friendly approach.</p>
+
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfW_sX3JVMiLs8nBzn433okZZhMmG6Np2uiJq53s_-Ym9j76A/viewform?usp=header" class="buy-btn">Buy Now</a>
+
+    <button class="buy-btn" onclick="toggleInfo(this)">More Infos</button>
+
+    <div class="more-info">
+      <strong>Detailed Syllabus:</strong>
+      <ul>
+        <li>🧠 Introduction to Operating Systems & Linux</li>
+        <li>📂 Filesystem, Processes & Permissions</li>
+        <li>🔧 Shell Scripting & Command Line</li>
+        <li>💻 Process Scheduling & Memory Management</li>
+        <li>🌐 Networking Basics in Linux</li>
+        <li>🛠️ Real Projects & Server Deployment</li>
+  <li>🔧 Price: 2000 DZD</li>
+         <li>🌐 Duration : 1 Month</li>
+      </ul>
+      <p>👨‍🏫 Delivered by <strong>TOUIL Abderezak</strong>, Student at ESI, with lifetime access, downloadable materials, and a certificate of completion.</p>
+    </div>
+  </div>
+</div>
+
+ <div class="course">
+        <img src="https://tse4.mm.bing.net/th/id/OIP.uoorexdE_jdJ8TYwaqp93QHaEr?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="UI/UX Beginner">
+        <div class="course-content">
+          <h3>UI/UX Design for Beginners</h3>
+          <p>Learn the fundamentals of user interface and experience design from scratch using adequate plateforms and indeed logical designing thinking.</p>
+
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLScLsXugKfsWHPE9FgrXpmEunFUbdCrue4N0PqIQgHO2Yi-fgQ/viewform?usp=header" class="buy-btn">Buy Now</a>
+
+          <button class="buy-btn" onclick="toggleInfo(this)">More Infos</button>
+
+          <div class="more-info">
+            <strong>Detailed Syllabus:</strong>
+            <ul>
+              <li>🎨 Introduction to UI Principles</li>
+              <li>🔍 User Research & Personas</li>
+              <li>🧩 Wireframing and Prototyping (Figma)</li>
+              <li>🛠 Design Tools (Figma, Adobe XD)</li>
+              <li>📱 Responsive Design Basics</li>
+              <li>💼 Final Project: Build a complete prototype</li>
+            </ul>
+            <p>👨‍🏫 Delivered by Yasser Maouchi, with lifetime access, downloadable content, and a certificate of completion.</p>
+          </div>
+        </div>
+      </div>
+
+
+<div class="course free-course">
+
+  <img src="https://tse1.mm.bing.net/th/id/OIP.8FKEC3yvVGnRC82EYkeGKwAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Cours d'Algorithmique">
+  <div class="course-content">
+    <h3>Algorithmique et structures de données statiques (ALSDS) </h3>
+    <p>Ce cours est destiné aux étudiants de l’ESI, offert GRATUITEMENT pour les aider à établir de solides bases dans ce module.</p>
+
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdBGAS4gJ3w4pqc5Qmvcf9xW0ngZeZFEym1VqPnr7Wdd6AQVA/viewform?usp=header" class="buy-btn"><strong>GRATUIT</strong></a>
+
+    <button class="buy-btn" onclick="toggleInfo(this)">Plus d'infos</button>
+
+    <div class="more-info">
+      <strong>Plan détaillé :</strong>
+      <ul>
+        <li>📌 Bases des algorithmes et des organigrammes</li>
+        <li>🧮 Récursivité, boucles et structures itératives</li>
+        <li>📊 Algorithmes de tri et de recherche</li>
+        <li>📦 Analyse de la complexité (temps et mémoire)</li>
+        <li>🏆 Défi final : Résolution de problèmes réels</li>
+      </ul>
+      <p>👨‍🏫 Proposé par <strong>TOUIL Abderezak</strong>, expert en algorithmique (niveau olympiade) et étudiant à l’ESI. Accès complet, contenu téléchargeable et Suivi au temps reel.</p>
+    </div>
+  </div>
+</div>
+
+
+
+    </div>
+  </div>
+
+  <script>
+    function toggleInfo(button) {
+      const info = button.nextElementSibling;
+      if (info.style.display === 'block') {
+        info.style.display = 'none';
+        button.textContent = 'More Infos';
+      } else {
+        info.style.display = 'block';
+        button.textContent = 'Hide Infos';
+      }
+    }
+  </script>
+</body>
+</html>
