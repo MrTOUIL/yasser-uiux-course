@@ -3,18 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <title>Our UI/UX Courses</title>
-  <link rel="stylesheet" href="./css/style.css"> <!-- Changé à ./ au lieu de / -->
+  <link rel="stylesheet" href="./css/style.css">
   <style>
+    /* Fond d'écran principal */
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       padding: 0;
       background: url('https://wallpaperaccess.com/full/1182799.jpg') no-repeat center center fixed;
       background-size: cover;
-      color: white; /* Pour un meilleur contraste */
+      min-height: 100vh;
+      position: relative;
     }
 
-    /* Ajoutez un overlay sombre pour améliorer la lisibilité */
+    /* Overlay sombre */
     body::before {
       content: "";
       position: fixed;
@@ -22,89 +24,216 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0, 0, 0, 0.7);
       z-index: -1;
     }
 
     .container {
       max-width: 1100px;
-      margin: auto;
-      padding: 30px;
-      background-color: rgba(255, 255, 255, 0.9); /* Fond légèrement transparent */
-      border-radius: 15px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      margin: 0 auto;
+      padding: 40px 20px;
     }
 
     h1 {
       text-align: center;
       margin-bottom: 40px;
-      color: #df5a21;
+      color: #ff9800;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      font-size: 2.5rem;
     }
 
-    /* ... (gardez le reste de votre CSS existant) ... */
+    .course-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
 
     .course {
-      background-color: rgba(255, 255, 255, 0.95); /* Plus opaque pour lisibilité */
-      /* ... (autres styles existants) ... */
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      transition: all 0.3s ease;
+      position: relative;
     }
 
-    /* Ajoutez un bouton de retour */
+    .course:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Style spécial pour le cours gratuit */
+    .free-course {
+      background-color: rgba(76, 175, 80, 0.9);
+      border: 2px solid #4CAF50;
+      animation: pulse 2s infinite;
+    }
+
+    .free-course h3 {
+      color: white !important;
+    }
+
+    .free-course p {
+      color: #e8f5e9 !important;
+    }
+
+    .free-tag {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background-color: #2E7D32;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 0.8rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7); }
+      70% { box-shadow: 0 0 0 15px rgba(76, 175, 80, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); }
+    }
+
+    .course img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-bottom: 1px solid #eee;
+    }
+
+    .course-content {
+      padding: 20px;
+    }
+
+    .course h3 {
+      margin: 0 0 10px;
+      color: #333;
+      font-size: 1.3rem;
+    }
+
+    .course p {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .buy-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #ff9800;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s;
+      cursor: pointer;
+      flex: 1;
+      text-align: center;
+    }
+
+    .buy-btn:hover {
+      background-color: #e68900;
+      transform: translateY(-2px);
+    }
+
+    .free-btn {
+      background-color: #2E7D32;
+    }
+
+    .free-btn:hover {
+      background-color: #1B5E20;
+    }
+
+    .more-info {
+      display: none;
+      margin-top: 15px;
+      font-size: 14px;
+      color: #444;
+      border-top: 1px solid #ddd;
+      padding-top: 10px;
+      animation: fadeIn 0.4s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     .back-btn {
       display: inline-block;
-      margin-bottom: 20px;
-      padding: 10px 15px;
+      margin-bottom: 30px;
+      padding: 12px 25px;
       background-color: #ff9800;
       color: white;
       text-decoration: none;
-      border-radius: 5px;
+      border-radius: 30px;
       font-weight: bold;
+      transition: all 0.3s;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .back-btn:hover {
+      background-color: #e68900;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <a href="./index.html" class="back-btn">← Back to Home</a> <!-- Bouton de retour -->
+    <a href="./index.html" class="back-btn">← Back to Home</a>
     <h1>Our Courses</h1>
     <div class="course-list">
 
-     
+      <div class="course">
+        <img src="https://tse4.mm.bing.net/th/id/OIP.NUBsH2ptezkbTQlPvywDAgHaHa?pid=ImgDet&rs=1" alt="Linux Course">
+        <div class="course-content">
+          <h3>Mastering Linux: Operating Systems for beginners (SYS1)</h3>
+          <p>Master the core concepts of Linux and Operating Systems in a clear, hands-on, beginner-friendly approach.</p>
 
-    <div class="course">
-  <img src="https://tse4.mm.bing.net/th/id/OIP.NUBsH2ptezkbTQlPvywDAgHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Linux Course">
-  <div class="course-content">
-    <h3>Mastering Linux: Operating Systems for begginers (SYS1)</h3>
-    <p>Master the core concepts of Linux and Operating Systems in a clear, hands-on, beginner-friendly approach.</p>
+          <div class="btn-group">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfW_sX3JVMiLs8nBzn433okZZhMmG6Np2uiJq53s_-Ym9j76A/viewform?usp=header" class="buy-btn">Buy Now</a>
+            <button class="buy-btn" onclick="toggleInfo(this)">More Info</button>
+          </div>
 
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfW_sX3JVMiLs8nBzn433okZZhMmG6Np2uiJq53s_-Ym9j76A/viewform?usp=header" class="buy-btn">Buy Now</a>
+          <div class="more-info">
+            <strong>Detailed Syllabus:</strong>
+            <ul>
+              <li>🧠 Introduction to Operating Systems & Linux</li>
+              <li>📂 Filesystem, Processes & Permissions</li>
+              <li>🔧 Shell Scripting & Command Line</li>
+              <li>💻 Process Scheduling & Memory Management</li>
+              <li>🌐 Networking Basics in Linux</li>
+              <li>🛠️ Real Projects & Server Deployment</li>
+              <li>🔧 Price: 2000 DZD</li>
+              <li>🌐 Duration: 1 Month</li>
+            </ul>
+            <p>👨‍🏫 Delivered by <strong>TOUIL Abderezak</strong>, Student at ESI, with lifetime access, downloadable materials, and a certificate of completion.</p>
+          </div>
+        </div>
+      </div>
 
-    <button class="buy-btn" onclick="toggleInfo(this)">More Infos</button>
-
-    <div class="more-info">
-      <strong>Detailed Syllabus:</strong>
-      <ul>
-        <li>🧠 Introduction to Operating Systems & Linux</li>
-        <li>📂 Filesystem, Processes & Permissions</li>
-        <li>🔧 Shell Scripting & Command Line</li>
-        <li>💻 Process Scheduling & Memory Management</li>
-        <li>🌐 Networking Basics in Linux</li>
-        <li>🛠️ Real Projects & Server Deployment</li>
-  <li>🔧 Price: 2000 DZD</li>
-         <li>🌐 Duration : 1 Month</li>
-      </ul>
-      <p>👨‍🏫 Delivered by <strong>TOUIL Abderezak</strong>, Student at ESI, with lifetime access, downloadable materials, and a certificate of completion.</p>
-    </div>
-  </div>
-</div>
-
- <div class="course">
-        <img src="https://tse4.mm.bing.net/th/id/OIP.uoorexdE_jdJ8TYwaqp93QHaEr?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="UI/UX Beginner">
+      <div class="course">
+        <img src="https://tse4.mm.bing.net/th/id/OIP.uoorexdE_jdJ8TYwaqp93QHaEr?pid=ImgDet&rs=1" alt="UI/UX Beginner">
         <div class="course-content">
           <h3>UI/UX Design for Beginners</h3>
-          <p>Learn the fundamentals of user interface and experience design from scratch using adequate plateforms and indeed logical designing thinking.</p>
+          <p>Learn the fundamentals of user interface and experience design from scratch using adequate platforms and indeed logical design thinking.</p>
 
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLScLsXugKfsWHPE9FgrXpmEunFUbdCrue4N0PqIQgHO2Yi-fgQ/viewform?usp=header" class="buy-btn">Buy Now</a>
-
-          <button class="buy-btn" onclick="toggleInfo(this)">More Infos</button>
+          <div class="btn-group">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScLsXugKfsWHPE9FgrXpmEunFUbdCrue4N0PqIQgHO2Yi-fgQ/viewform?usp=header" class="buy-btn">Buy Now</a>
+            <button class="buy-btn" onclick="toggleInfo(this)">More Info</button>
+          </div>
 
           <div class="more-info">
             <strong>Detailed Syllabus:</strong>
@@ -121,46 +250,44 @@
         </div>
       </div>
 
+      <div class="course free-course">
+        <div class="free-tag">FREE</div>
+        <img src="https://tse1.mm.bing.net/th/id/OIP.8FKEC3yvVGnRC82EYkeGKwAAAA?pid=ImgDet&rs=1" alt="Algorithm Course">
+        <div class="course-content">
+          <h3>Algorithmique et structures de données statiques (ALSDS)</h3>
+          <p>Ce cours est destiné aux étudiants de l'ESI, offert GRATUITEMENT pour les aider à établir de solides bases dans ce module.</p>
 
-<div class="course free-course">
+          <div class="btn-group">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdBGAS4gJ3w4pqc5Qmvcf9xW0ngZeZFEym1VqPnr7Wdd6AQVA/viewform?usp=header" class="buy-btn free-btn">GET IT FREE</a>
+            <button class="buy-btn" onclick="toggleInfo(this)">More Info</button>
+          </div>
 
-  <img src="https://tse1.mm.bing.net/th/id/OIP.8FKEC3yvVGnRC82EYkeGKwAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Cours d'Algorithmique">
-  <div class="course-content">
-    <h3>Algorithmique et structures de données statiques (ALSDS) </h3>
-    <p>Ce cours est destiné aux étudiants de l’ESI, offert GRATUITEMENT pour les aider à établir de solides bases dans ce module.</p>
-
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdBGAS4gJ3w4pqc5Qmvcf9xW0ngZeZFEym1VqPnr7Wdd6AQVA/viewform?usp=header" class="buy-btn"><strong>GRATUIT</strong></a>
-
-    <button class="buy-btn" onclick="toggleInfo(this)">Plus d'infos</button>
-
-    <div class="more-info">
-      <strong>Plan détaillé :</strong>
-      <ul>
-        <li>📌 Bases des algorithmes et des organigrammes</li>
-        <li>🧮 Récursivité, boucles et structures itératives</li>
-        <li>📊 Algorithmes de tri et de recherche</li>
-        <li>📦 Analyse de la complexité (temps et mémoire)</li>
-        <li>🏆 Défi final : Résolution de problèmes réels</li>
-      </ul>
-      <p>👨‍🏫 Proposé par <strong>TOUIL Abderezak</strong>, expert en algorithmique (niveau olympiade) et étudiant à l’ESI. Accès complet, contenu téléchargeable et Suivi au temps reel.</p>
-    </div>
-  </div>
-</div>
-
-
+          <div class="more-info">
+            <strong>Plan détaillé :</strong>
+            <ul>
+              <li>📌 Bases des algorithmes et des organigrammes</li>
+              <li>🧮 Récursivité, boucles et structures itératives</li>
+              <li>📊 Algorithmes de tri et de recherche</li>
+              <li>📦 Analyse de la complexité (temps et mémoire)</li>
+              <li>🏆 Défi final : Résolution de problèmes réels</li>
+            </ul>
+            <p>👨‍🏫 Proposé par <strong>TOUIL Abderezak</strong>, expert en algorithmique (niveau olympiade) et étudiant à l'ESI. Accès complet, contenu téléchargeable et Suivi en temps réel.</p>
+          </div>
+        </div>
+      </div>
 
     </div>
   </div>
 
   <script>
     function toggleInfo(button) {
-      const info = button.nextElementSibling;
+      const info = button.parentElement.nextElementSibling;
       if (info.style.display === 'block') {
         info.style.display = 'none';
-        button.textContent = 'More Infos';
+        button.textContent = 'More Info';
       } else {
         info.style.display = 'block';
-        button.textContent = 'Hide Infos';
+        button.textContent = 'Hide Info';
       }
     }
   </script>
