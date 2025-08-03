@@ -3,7 +3,6 @@
 This is a professional full-stack website for selling UI/UX courses, made with:
 
 - ✅ Node.js + Express.js
-- ✅ MongoDB + Mongoose
 - ✅ EJS templating engine
 - ✅ CSS3 / Bootstrap / Tailwind
 
