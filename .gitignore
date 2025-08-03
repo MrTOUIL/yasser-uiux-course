@@ -1,4 +1,0 @@
-# Seulement l'essentiel pour un site statique
-node_modules/
-.env
-.DS_Store
