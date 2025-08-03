@@ -3,19 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <title>Our UI/UX Courses</title>
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="./css/style.css"> <!-- Changé à ./ au lieu de / -->
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f9f9f9;
       margin: 0;
       padding: 0;
+      background: url('https://wallpaperaccess.com/full/1182799.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: white; /* Pour un meilleur contraste */
+    }
+
+    /* Ajoutez un overlay sombre pour améliorer la lisibilité */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: -1;
     }
 
     .container {
       max-width: 1100px;
       margin: auto;
       padding: 30px;
+      background-color: rgba(255, 255, 255, 0.9); /* Fond légèrement transparent */
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     }
 
     h1 {
@@ -24,83 +41,30 @@
       color: #df5a21;
     }
 
-    .course-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-    }
+    /* ... (gardez le reste de votre CSS existant) ... */
 
     .course {
-      background-color: #fff;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(178, 8, 8, 0.689);
-      overflow: hidden;
-      transition: transform 0.3s;
-      position: relative;
+      background-color: rgba(255, 255, 255, 0.95); /* Plus opaque pour lisibilité */
+      /* ... (autres styles existants) ... */
     }
 
-    .course:hover {
-      transform: translateY(-5px);
-    }
-
-    .course img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-    }
-
-    .course-content {
-      padding: 20px;
-    }
-
-    .course h3 {
-      margin: 0 0 10px;
-      color: #222;
-    }
-
-    .course p {
-      font-size: 14px;
-      color: #bb8d62;
-    }
-
-    .buy-btn {
+    /* Ajoutez un bouton de retour */
+    .back-btn {
       display: inline-block;
-      margin-top: 15px;
-      margin-right: 10px;
-      padding: 10px 20px;
+      margin-bottom: 20px;
+      padding: 10px 15px;
       background-color: #ff9800;
       color: white;
-      border: none;
-      border-radius: 6px;
       text-decoration: none;
+      border-radius: 5px;
       font-weight: bold;
-      transition: background-color 0.2s;
-      cursor: pointer;
-    }
-
-    .buy-btn:hover {
-      background-color: #e68900;
-    }
-
-    .more-info {
-      display: none;
-      margin-top: 15px;
-      font-size: 14px;
-      color: #444;
-      border-top: 1px solid #ddd;
-      padding-top: 10px;
-      animation: fadeIn 0.4s ease-in-out;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1> Our Courses</h1>
+    <a href="./index.html" class="back-btn">← Back to Home</a> <!-- Bouton de retour -->
+    <h1>Our Courses</h1>
     <div class="course-list">
 
      
