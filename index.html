@@ -310,16 +310,65 @@
         margin: 0 auto;
       }
     }
+
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 20px;
+      position: relative;
+    }
+    
+    .welcome-text {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: Arial, sans-serif;
+      color: black;
+      font-weight: bold;
+      font-size: 18px;
+      background: rgba(255,255,255,0.9);
+      padding: 8px 15px;
+      border-radius: 30px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      animation: 
+        welcomeEntrance 1s ease-out forwards,
+        floatGlow 3s ease-in-out infinite 1s;
+      opacity: 0;
+      white-space: nowrap;
+    }
+    
+    @keyframes welcomeEntrance {
+      0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+    }
+    
+    @keyframes floatGlow {
+      0%, 100% {
+        transform: translateX(-50%) translateY(0);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      }
+      50% {
+        transform: translateX(-50%) translateY(-5px);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.15), 0 0 15px rgba(255,255,255,0.4);
+      }
+    }
+    
   </style>
 </head>
 <body>
   <!-- Floating background elements -->
   <div class="floating-elements">
-    <div class="floating-element" style="width: 10px; height: 10px; left: 10%; top: 20%; animation-delay: 0s;"></div>
-    <div class="floating-element" style="width: 15px; height: 15px; left: 25%; top: 50%; animation-delay: 2s;"></div>
-    <div class="floating-element" style="width: 8px; height: 8px; left: 75%; top: 30%; animation-delay: 4s;"></div>
-    <div class="floating-element" style="width: 12px; height: 12px; left: 60%; top: 70%; animation-delay: 6s;"></div>
-    <div class="floating-element" style="width: 20px; height: 20px; left: 40%; top: 80%; animation-delay: 8s;"></div>
+    <!-- [Previous floating elements] -->
   </div>
 
   <header>
@@ -327,6 +376,9 @@
       <a href="./nabda.html">
         <img src="./images/YH.png" alt="YH Academy Logo" class="logo animate__animated animate__fadeInLeft" />
       </a>
+      
+      <div class="welcome-text">WELCOME TO YH ACADEMY'S OFFICIAL WEBSITE</div>
+      
       <nav>
         <ul class="nav-links">
           <li><a href="./buy.html" class="animate__animated animate__fadeInDown animate__delay-1s">Courses</a></li>
@@ -335,6 +387,7 @@
       </nav>
     </div>
   </header>
+
 
   <section class="hero">
     <h2 class="animate__animated animate__fadeIn">Master UI/UX & CS Basics</h2>
