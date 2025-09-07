@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <link rel="icon" type="image/png" href="./images/YH.png" />
+  <link rel="icon" type="image/png" href="./images/YH.png" />
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About Us - Atlas Academy</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     /* Police personnalisée */
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
@@ -15,6 +16,7 @@
       --dark: #1a1a2e;
       --light: #f8f9fa;
       --accent: #00b4d8;
+      --success: #06d6a0;
     }
     
     * {
@@ -32,7 +34,7 @@
       position: relative;
     }
     
-    /* Particules animées en fond */
+    /* Particules animées en fond améliorées */
     .particles {
       position: fixed;
       top: 0;
@@ -45,18 +47,42 @@
     
     .particle {
       position: absolute;
-      background: rgba(255, 255, 255, 0.5);
       border-radius: 50%;
       animation: float linear infinite;
     }
     
     @keyframes float {
-      0% { transform: translateY(0) translateX(0); }
-      50% { transform: translateY(-100px) translateX(100px); }
-      100% { transform: translateY(0) translateX(0); }
+      0% { transform: translateY(0) translateX(0) rotate(0deg); }
+      50% { transform: translateY(-100px) translateX(100px) rotate(180deg); }
+      100% { transform: translateY(0) translateX(0) rotate(360deg); }
     }
     
-    /* Header */
+    /* Effet de flou mouvant en arrière-plan */
+    .moving-blobs {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      opacity: 0.5;
+      filter: blur(70px);
+    }
+    
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      animation: blobMove 20s infinite alternate ease-in-out;
+    }
+    
+    @keyframes blobMove {
+      0% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(50vw, 30vh) scale(1.5); }
+      66% { transform: translate(20vw, 60vh) scale(0.8); }
+      100% { transform: translate(80vw, 20vh) scale(1.2); }
+    }
+    
+    /* Header animé */
     header {
       background: rgba(26, 26, 46, 0.8);
       backdrop-filter: blur(10px);
@@ -66,6 +92,11 @@
       width: 100%;
       top: 0;
       z-index: 100;
+      transition: all 0.4s ease;
+    }
+    
+    header.hidden {
+      transform: translateY(-100%);
     }
     
     .header-container {
@@ -78,11 +109,12 @@
     
     .logo {
       height: 60px;
-      transition: transform 0.3s;
+      transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+      filter: drop-shadow(0 5px 15px rgba(255, 123, 0, 0.5));
     }
     
     .logo:hover {
-      transform: scale(1.1);
+      transform: scale(1.1) rotate(5deg);
     }
     
     .nav-links {
@@ -122,7 +154,7 @@
     
     /* Contenu principal */
     main {
-      padding: 120px 40px 60px;
+      padding: 140px 40px 60px;
       max-width: 1200px;
       margin: 0 auto;
     }
@@ -135,32 +167,53 @@
     
     .page-title h1 {
       font-size: 3.5rem;
-      background: linear-gradient(to right, var(--primary), var(--accent));
+      background: linear-gradient(to right, var(--primary), var(--accent), var(--secondary));
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
       display: inline-block;
       margin-bottom: 20px;
       animation: titleGlow 3s ease-in-out infinite alternate;
+      position: relative;
+    }
+    
+    .page-title h1::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      border-radius: 2px;
     }
     
     @keyframes titleGlow {
-      0% { text-shadow: 0 0 10px rgba(255, 123, 0, 0.3); }
-      100% { text-shadow: 0 0 20px rgba(0, 180, 216, 0.5); }
+      0% { 
+        text-shadow: 0 0 10px rgba(255, 123, 0, 0.3);
+        transform: translateY(0);
+      }
+      100% { 
+        text-shadow: 0 0 20px rgba(0, 180, 216, 0.5);
+        transform: translateY(-5px);
+      }
     }
     
     .page-title p {
       font-size: 1.2rem;
       max-width: 700px;
-      margin: 0 auto;
+      margin: 30px auto 0;
       opacity: 0.9;
+      line-height: 1.6;
     }
     
-    /* Carte de profil */
+    /* Carte de profil améliorée */
     .profile-container {
       display: flex;
       justify-content: center;
       margin-bottom: 60px;
+      perspective: 1000px;
     }
     
     .profile-card {
@@ -168,19 +221,31 @@
       backdrop-filter: blur(10px);
       border-radius: 20px;
       padding: 40px;
-      width: 800px;
+      width: 900px;
       max-width: 100%;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
       border: 1px solid rgba(255, 255, 255, 0.1);
-      transition: transform 0.4s, box-shadow 0.4s;
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       position: relative;
       overflow: hidden;
-      animation: fadeIn 0.6s ease-out 0.2s both;
+      animation: cardAppear 0.8s ease-out 0.2s both;
+      transform-style: preserve-3d;
+    }
+    
+    @keyframes cardAppear {
+      0% { 
+        opacity: 0;
+        transform: translateY(50px) rotateX(15deg);
+      }
+      100% { 
+        opacity: 1;
+        transform: translateY(0) rotateX(0);
+      }
     }
     
     .profile-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+      transform: translateY(-15px) rotateY(5deg);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
     }
     
     .profile-card::before {
@@ -190,9 +255,9 @@
       left: -50%;
       width: 200%;
       height: 200%;
-      background: radial-gradient(circle, rgba(255,123,0,0.1) 0%, transparent 70%);
+      background: linear-gradient(45deg, transparent, rgba(255,123,0,0.1), transparent);
       transform: rotate(30deg);
-      transition: all 0.6s;
+      transition: all 0.8s;
       opacity: 0;
     }
     
@@ -213,31 +278,55 @@
       position: relative;
     }
     
+    .profile-img-container {
+      position: relative;
+      margin-right: 30px;
+    }
+    
     .profile-img {
-      width: 150px;
-      height: 150px;
+      width: 180px;
+      height: 180px;
       border-radius: 50%;
       object-fit: cover;
       border: 4px solid var(--primary);
-      box-shadow: 0 5px 20px rgba(255, 123, 0, 0.4);
-      transition: all 0.4s;
+      box-shadow: 0 10px 30px rgba(255, 123, 0, 0.4);
+      transition: all 0.5s ease;
       position: relative;
       z-index: 2;
     }
     
+    .profile-img-container::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: var(--primary);
+      top: 0;
+      left: 0;
+      z-index: 1;
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1.1); opacity: 0.5; }
+      50% { transform: scale(1.2); opacity: 0.3; }
+      100% { transform: scale(1.1); opacity: 0.5; }
+    }
+    
     .profile-img:hover {
-      transform: scale(1.1);
-      box-shadow: 0 8px 30px rgba(255, 123, 0, 0.6);
+      transform: scale(1.1) rotate(5deg);
+      box-shadow: 0 15px 40px rgba(255, 123, 0, 0.6);
     }
     
     .profile-name {
-      margin-left: 30px;
+      flex: 1;
     }
     
     .profile-name h2 {
-      font-size: 2.2rem;
+      font-size: 2.5rem;
       margin-bottom: 10px;
-      background: linear-gradient(to right, var(--primary), var(--accent));
+      background: linear-gradient(to right, var(--primary), var(--accent), var(--secondary));
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
@@ -253,7 +342,7 @@
       bottom: -8px;
       left: 0;
       background: var(--primary);
-      transition: width 0.4s ease;
+      transition: width 0.6s ease;
     }
     
     .profile-card:hover .profile-name h2::after {
@@ -263,7 +352,20 @@
     .profile-title {
       color: var(--accent);
       font-weight: 300;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+    
+    .profile-location {
+      display: flex;
+      align-items: center;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 1rem;
+    }
+    
+    .profile-location i {
+      margin-right: 8px;
+      color: var(--success);
     }
     
     .profile-bio {
@@ -285,11 +387,68 @@
       font-family: serif;
     }
     
+    /* Section des compétences */
+    .skills-section {
+      margin: 40px 0;
+    }
+    
+    .skills-title {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: var(--accent);
+      position: relative;
+      display: inline-block;
+    }
+    
+    .skills-title::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 50%;
+      height: 2px;
+      background: var(--accent);
+    }
+    
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
+    }
+    
+    .skill-item {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .skill-item:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    .skill-item i {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: var(--primary);
+    }
+    
+    .skill-item h4 {
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+    
+    /* Boutons sociaux améliorés */
     .social-links {
       display: flex;
       justify-content: center;
-      gap: 25px;
+      gap: 20px;
       flex-wrap: wrap;
+      margin-top: 40px;
     }
     
     .social-btn {
@@ -302,10 +461,11 @@
       text-decoration: none;
       font-weight: 600;
       overflow: hidden;
-      transition: all 0.3s;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       z-index: 1;
       border: none;
       cursor: pointer;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     }
     
     .social-btn::before {
@@ -318,6 +478,11 @@
       background: linear-gradient(45deg, var(--primary), var(--secondary));
       z-index: -1;
       transition: all 0.4s;
+    }
+    
+    .social-btn:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
     }
     
     .social-btn:hover::before {
@@ -341,6 +506,11 @@
       font-size: 1.3rem;
     }
     
+    /* Portfolio link button */
+    .portfolio-btn {
+      background: linear-gradient(45deg, var(--accent), var(--success));
+    }
+    
     /* Section de mission */
     .mission-section {
       background: rgba(255, 255, 255, 0.05);
@@ -353,6 +523,7 @@
       overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.1);
       animation: fadeIn 0.6s ease-out 0.4s both;
+      transform-style: preserve-3d;
     }
     
     .mission-section::before {
@@ -389,6 +560,17 @@
       background: rgba(26, 26, 46, 0.8);
       backdrop-filter: blur(10px);
       margin-top: 60px;
+      position: relative;
+    }
+    
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(to right, var(--primary), var(--accent), var(--secondary));
     }
     
     footer p {
@@ -403,6 +585,22 @@
     }
     
     /* Responsive */
+    @media (max-width: 968px) {
+      .profile-header {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .profile-img-container {
+        margin-right: 0;
+        margin-bottom: 25px;
+      }
+      
+      .profile-name h2 {
+        font-size: 2rem;
+      }
+    }
+    
     @media (max-width: 768px) {
       .header-container {
         flex-direction: column;
@@ -421,19 +619,9 @@
         padding: 30px;
       }
       
-      .profile-header {
-        flex-direction: column;
-        text-align: center;
-      }
-      
-      .profile-name {
-        margin-left: 0;
-        margin-top: 25px;
-      }
-      
       .profile-img {
-        width: 120px;
-        height: 120px;
+        width: 150px;
+        height: 150px;
       }
       
       .profile-bio {
@@ -443,16 +631,22 @@
       .mission-section {
         padding: 30px;
       }
+      
+      .skills-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      }
     }
   </style>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
   <!-- Particules animées -->
   <div class="particles" id="particles"></div>
   
+  <!-- Flou mouvant en arrière-plan -->
+  <div class="moving-blobs" id="moving-blobs"></div>
+  
   <!-- Header -->
-  <header>
+  <header id="main-header">
     <div class="header-container">
       <a href="./index.html">
         <img src="./images/atlas.png" alt="Atlas Academy Logo" class="logo">
@@ -470,24 +664,28 @@
   <!-- Contenu principal -->
   <main>
     <div class="page-title">
-      <h1>Meet Our Team</h1>
-      <p>The passionate team behind Atlas Academy, dedicated to providing quality education in Computer Science.</p>
+      <h1>Meet Our Founder</h1>
+      <p>The visionary behind Atlas Academy, dedicated to providing quality education in Computer Science and Cybersecurity.</p>
     </div>
-    
-  
     
     <div class="profile-container">
       <!-- TOUIL Abderezak -->
       <div class="profile-card">
         <div class="profile-header">
-          <img
-            src="https://media.licdn.com/dms/image/v2/D5603AQE_ExeWLXMOFw/profile-displayphoto-shrink_800_800/B56ZVytj.rHEAg-/0/1741386302997?e=1756944000&v=beta&t=Syl0escS-fB9nXSEyxB3yQCMtaHPPA-Raj6UUIOiKiw"  
-            alt="TOUIL Abderezak"
-            class="profile-img"
-          />
+          <div class="profile-img-container">
+            <img
+              src="https://media.licdn.com/dms/image/v2/D5603AQE_ExeWLXMOFw/profile-displayphoto-shrink_400_400/B56ZVytj.rHEAk-/0/1741386302997?e=1759968000&v=beta&t=8vMm2vH1wehWsOcpG5treI0FWf2std38awn6YWlMd6Y"  
+              alt="TOUIL Abderezak"
+              class="profile-img"
+            />
+          </div>
           <div class="profile-name">
             <h2>TOUIL ABDEREZAK</h2>
             <p class="profile-title">Founder & Computer Science Instructor</p>
+            <div class="profile-location">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>ESI, Algiers, Algeria</span>
+            </div>
           </div>
         </div>
         
@@ -495,6 +693,33 @@
           <p>TOUIL Abderezak is a second-year Computer Science student at the Higher National School of Computer Science (ESI, ex-INI) in Algiers, Algeria. As the founder of Atlas Academy, he combines his deep passion for cybersecurity and systems programming with a commitment to education.</p>
           <p>Abderezak specializes in operating systems, backend development, and ethical hacking. His hands-on approach to teaching comes from extensive practical experience in algorithmic problem-solving and security challenges. He holds an international certificate from Columbia University in "Learning AI through Visualization", which informs his unique teaching methodology.</p>
           <p>At Atlas Academy, Abderezak has created a learning environment that bridges theoretical computer science with real-world applications, particularly focusing on systems programming and cybersecurity fundamentals.</p>
+        </div>
+        
+        <!-- Skills Section -->
+        <div class="skills-section">
+          <h3 class="skills-title">Areas of Expertise</h3>
+          <div class="skills-grid">
+            <div class="skill-item">
+              <i class="fas fa-shield-alt"></i>
+              <h4>Cybersecurity</h4>
+              <p>Ethical Hacking & Defense</p>
+            </div>
+            <div class="skill-item">
+              <i class="fas fa-code"></i>
+              <h4>Systems Programming</h4>
+              <p>OS & Backend Development</p>
+            </div>
+            <div class="skill-item">
+              <i class="fas fa-brain"></i>
+              <h4>Algorithm Design</h4>
+              <p>Problem Solving</p>
+            </div>
+            <div class="skill-item">
+              <i class="fas fa-graduation-cap"></i>
+              <h4>Education</h4>
+              <p>Computer Science Teaching</p>
+            </div>
+          </div>
         </div>
         
         <div class="social-links">
@@ -510,44 +735,13 @@
             <i class="fas fa-envelope"></i>
             <span>Email</span>
           </a>
+          <a href="https://mrtouil.github.io/portfolio_TOUIL_Selma/" class="social-btn portfolio-btn">
+            <i class="fas fa-briefcase"></i>
+            <span>Portfolio</span>
+          </a>
         </div>
       </div>
     </div>
-
-    <div class="profile-container">
-  <!-- Admane Oussama -->
-  <div class="profile-card">
-    <div class="profile-header">
-      <img
-        src="https://media.licdn.com/dms/image/v2/D5603AQEbTPkB4547wg/profile-displayphoto-shrink_800_800/B56ZWrXnR7GsAg-/0/1742336850138?e=1758153600&v=beta&t=xIbhcNjcEuOQVKWJ9Wm1o3dM_IVuHALZ3zWVIJUBhEI"
-        alt="Admane Oussama"
-        class="profile-img"
-      />
-      <div class="profile-name">
-        <h2>ADMANE OUSSAMA</h2>
-        <p class="profile-title">Co-Founder & Instructor at Atlas Academy</p>
-      </div>
-    </div>
-    
-    <div class="profile-bio">
-      <p>Admane Oussama is a second-year CS student at the Higher National School of Computer Science (ESI, ex-INI) in Algiers, Algeria. He is passionate about artificial intelligence, web development, and UI/UX design.</p>
-      <p>As a member of ETIC Club, he has worked as a UI Designer using Figma, contributed to public relations strategy, and participated in the development of web projects. His curiosity and motivation have led him to explore cybersecurity, programming, and AI.</p>
-      <p>Oussama has earned certifications such as "Introduction to Machine Learning" from Duke University and "AI Fundamentals" from DataCamp, demonstrating his commitment to continuous learning and academic excellence.</p>
-    </div>
-    
-    <div class="social-links">
-      <a href="https://www.linkedin.com/in/admane-oussama-275b52211/" class="social-btn">
-        <i class="fab fa-linkedin-in"></i>
-        <span>LinkedIn</span>
-      </a>
-      <a href="mailto:om_admane@esi.dz" class="social-btn">
-        <i class="fas fa-envelope"></i>
-        <span>Email</span>
-      </a>
-    </div>
-  </div>
-</div>
-
     
     <div class="mission-section">
       <h2>Our Mission</h2>
@@ -560,17 +754,17 @@
   </footer>
   
   <script>
-    // Animation des particules
+    // Animation des particules améliorée
     function createParticles() {
       const particlesContainer = document.getElementById('particles');
-      const particleCount = 30;
+      const particleCount = 50;
       
       for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
         particle.classList.add('particle');
         
         // Taille aléatoire
-        const size = Math.random() * 5 + 2;
+        const size = Math.random() * 8 + 2;
         particle.style.width = `${size}px`;
         particle.style.height = `${size}px`;
         
@@ -578,23 +772,134 @@
         particle.style.left = `${Math.random() * 100}%`;
         particle.style.top = `${Math.random() * 100}%`;
         
-        // Opacité aléatoire
-        particle.style.opacity = Math.random() * 0.5 + 0.1;
+        // Couleur aléatoire parmi les couleurs du thème
+        const colors = [
+          'rgba(255, 123, 0, 0.6)',
+          'rgba(108, 99, 255, 0.6)',
+          'rgba(0, 180, 216, 0.6)',
+          'rgba(6, 214, 160, 0.6)'
+        ];
+        particle.style.background = colors[Math.floor(Math.random() * colors.length)];
         
         // Durée d'animation aléatoire
-        const duration = Math.random() * 20 + 10;
+        const duration = Math.random() * 25 + 15;
         particle.style.animationDuration = `${duration}s`;
         
         // Délai aléatoire
-        particle.style.animationDelay = `${Math.random() * 10}s`;
+        particle.style.animationDelay = `${Math.random() * 20}s`;
         
         particlesContainer.appendChild(particle);
       }
     }
     
+    // Création des blobs mouvants en arrière-plan
+    function createMovingBlobs() {
+      const blobsContainer = document.getElementById('moving-blobs');
+      const blobCount = 4;
+      const colors = [
+        'rgba(255, 123, 0, 0.2)',
+        'rgba(108, 99, 255, 0.2)',
+        'rgba(0, 180, 216, 0.2)',
+        'rgba(6, 214, 160, 0.2)'
+      ];
+      
+      for (let i = 0; i < blobCount; i++) {
+        const blob = document.createElement('div');
+        blob.classList.add('blob');
+        
+        // Taille aléatoire
+        const size = Math.random() * 400 + 200;
+        blob.style.width = `${size}px`;
+        blob.style.height = `${size}px`;
+        
+        // Position initiale aléatoire
+        blob.style.left = `${Math.random() * 50}%`;
+        blob.style.top = `${Math.random() * 50}%`;
+        
+        // Couleur
+        blob.style.background = colors[i];
+        
+        // Durée d'animation aléatoire
+        const duration = Math.random() * 30 + 20;
+        blob.style.animationDuration = `${duration}s`;
+        
+        // Délai aléatoire
+        blob.style.animationDelay = `${Math.random() * 10}s`;
+        
+        blobsContainer.appendChild(blob);
+      }
+    }
+    
+    // Animation du header au défilement
+    let lastScroll = 0;
+    const header = document.getElementById('main-header');
+    
+    function handleScroll() {
+      const currentScroll = window.pageYOffset;
+      
+      if (currentScroll <= 0) {
+        header.classList.remove('hidden');
+        return;
+      }
+      
+      if (currentScroll > lastScroll && currentScroll > 200) {
+        header.classList.add('hidden');
+      } else if (currentScroll < lastScroll) {
+        header.classList.remove('hidden');
+      }
+      
+      lastScroll = currentScroll;
+    }
+    
+    // Effet de parallaxe sur la carte de profil
+    function setupParallax() {
+      const profileCard = document.querySelector('.profile-card');
+      
+      document.addEventListener('mousemove', (e) => {
+        if (!profileCard) return;
+        
+        const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+        const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+        
+        profileCard.style.transform = `translateY(-15px) rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+      });
+      
+      // Réinitialiser lorsque la souris quitte la carte
+      profileCard.addEventListener('mouseleave', () => {
+        profileCard.style.transform = 'translateY(-15px) rotateY(5deg)';
+      });
+      
+      profileCard.addEventListener('mouseenter', () => {
+        profileCard.style.transform = 'translateY(-15px) rotateY(5deg)';
+      });
+    }
+    
+    // Animation des éléments au défilement
+    function setupScrollAnimations() {
+      const animatedElements = document.querySelectorAll('.profile-card, .mission-section');
+      
+      function checkScroll() {
+        animatedElements.forEach(element => {
+          const elementPosition = element.getBoundingClientRect().top;
+          const screenPosition = window.innerHeight / 1.3;
+          
+          if (elementPosition < screenPosition) {
+            element.style.animation = 'fadeIn 1s forwards';
+          }
+        });
+      }
+      
+      window.addEventListener('scroll', checkScroll);
+      checkScroll(); // Vérifier au chargement initial
+    }
+    
     // Initialisation
     window.addEventListener('load', () => {
       createParticles();
+      createMovingBlobs();
+      setupParallax();
+      setupScrollAnimations();
+      window.addEventListener('scroll', handleScroll);
     });
   </script>
 </body>
